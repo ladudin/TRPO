@@ -74,6 +74,12 @@ class Matrix:
             return result
         else:
             raise TypeError("Неподдерживаемый тип для умножения")
+    
+    def __eq__(self, other):
+        """Проверка на равенство матриц."""
+        if not isinstance(other, Matrix):
+            return False
+        return self.data == other.data
 
 
 # Примеры использования
