@@ -42,6 +42,14 @@ class Matrix:
                 result.data[i][j] = self.data[i][j] - other.data[i][j]
         return result
 
+    def transpose(self):
+        """Транспонирование матрицы."""
+        result = Matrix(self.cols, self.rows)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                result.data[j][i] = self.data[i][j]
+        return result
+
     def __mul__(self, other):
         """Умножение матриц или умножение матрицы на скаляр."""
         if isinstance(other, (int, float)):
