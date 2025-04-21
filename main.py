@@ -41,3 +41,28 @@ class Matrix:
             for j in range(self.cols):
                 result.data[i][j] = self.data[i][j] - other.data[i][j]
         return result
+
+    def __mul__(self, other):
+        """Умножение матриц или умножение матрицы на скаляр."""
+        if isinstance(other, (int, float)):
+            # Умножение на скаляр
+            result = Matrix(self.rows, self.cols)
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    result.data[i][j] = self.data[i][j] * other
+            return result
+        elif isinstance(other, Matrix):
+            # Умножение матриц
+            if self.cols != other.rows:
+                raise ValueError(
+                    "Количество столбцов первой матрицы должно быть равно количеству строк второй"
+                )
+            
+            result = Matrix(self.rows, other.cols)
+            for i in range(self.rows):
+                for j in range(other.cols):
+                    for k in range(self.cols):
+                        result.data[i][j] += self.data[i][k] * other.data[k][j]
+            return result
+        else:
+            raise TypeError("Неподдерживаемый тип для умножения")
